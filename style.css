@@ -15,7 +15,7 @@
   .maroon-div {
     background-color: #5d0300;
     margin: auto;
-    margin-top: 70px;
+    margin-top: 20px;
     margin-bottom: 60px;
     border-radius: 24px;
     padding-top: 10px;
@@ -61,6 +61,7 @@
     font-size: 16px;
     font-family: retro-font;
     letter-spacing: 2px;
+    line-height: 1.5;
     width: 80%;
     margin: auto;
     border-radius: 26px;
@@ -73,7 +74,6 @@
     letter-spacing: 2px;
     font-size: 20px;
     color: #f57f00;
-    padding-top: 40px;
   }
 
   h3 {
@@ -88,6 +88,9 @@
     margin-right: auto;
     margin-top: 20px;
   }
+}
+.section-service {
+  margin-bottom: 10px;
 }
 
 /* Small devices (landscape phones, 576px and up) */
