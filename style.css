@@ -68,11 +68,6 @@
     color: #fdde8b;
     padding: 10px;
   }
-  #main-heading {
-    color: #5d0300;
-    font-size: 18px;
-    padding: 10px;
-  }
 
   h1 {
     font-family: retro-font;
@@ -314,9 +309,6 @@
       margin-top: 60px;
     }
 
-    #main-heading {
-      color: #5d0300;
-    }
   }
 
   /* Extra large devices (large desktops, 1200px and up)*/
