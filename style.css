@@ -67,12 +67,12 @@
     margin: auto;
     border-radius: 26px;
     color: #fdde8b;
-    padding-bottom: 6px;
-    padding-top: 6px;
+    padding: 10px;
   }
   #main-heading {
     color: #5d0300;
-    font-size: 14px;
+    font-size: 18px;
+    padding: 10px;
   }
 
   h1 {
@@ -85,7 +85,7 @@
 
   h3 {
     color: #5d0300;
-    font-size: 16px;
+    font-size: 18px;
   }
 
   #logo {
