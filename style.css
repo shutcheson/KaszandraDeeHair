@@ -59,7 +59,7 @@
 
   .heading {
     background-color: #ef8200;
-    font-size: 16px;
+    font-size: 20px;
     font-family: retro-font;
     letter-spacing: 2px;
     width: 80%;
@@ -86,6 +86,7 @@
     color: #5d0300;
     font-size: 18px;
     margin: 8px;
+    line-height: 1.4;
   }
 
   #logo {
