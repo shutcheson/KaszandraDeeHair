@@ -148,8 +148,7 @@
 
   .heading {
     background-color: #ef8200;
-    font-size: 16px;
-
+    font-size: 20px;
     letter-spacing: 2px;
     width: 80%;
     margin: auto;
@@ -157,6 +156,7 @@
     color: #fdde8b;
     padding-bottom: 6px;
     padding-top: 6px;
+    line-height: 1.4;
   }
   #main-heading {
     color: #5d0300;
