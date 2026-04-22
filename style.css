@@ -1,0 +1,542 @@
+/* ============================================================
+   Milkshake Salon — Modern 70s-revival boutique landing page
+   ============================================================ */
+
+/* ---------- Self-hosted display typeface ----------
+   Place the Frunchy Sage font files in /fonts
+   (e.g. fonts/frunchy-sage.woff2). Falls back to a
+   stylized serif stack until the file is in place. */
+@font-face {
+  font-family: 'Frunchy Sage';
+  src: url('fonts/frunchy-sage.woff2') format('woff2'),
+       url('fonts/frunchy-sage.woff') format('woff'),
+       url('fonts/frunchy-sage.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Design tokens ---------- */
+:root {
+  --cream: #FCF5E5;
+  --cream-translucent: rgba(252, 245, 229, 0.7);
+  --chocolate: #3E2723;
+  --chocolate-soft: rgba(62, 39, 35, 0.7);
+  --burnt-orange: #D97706;
+  --burnt-orange-dark: #B45309;
+  --sky-blue: #7DD3FC;
+
+  /* Typography stacks */
+  --font-display: 'Frunchy Sage', 'Playfair Display', 'Georgia', 'Times New Roman', serif;
+  --font-body: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+               Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  --radius-card: 40px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 10px 30px rgba(217, 119, 6, 0.08),
+                 0 2px 6px rgba(62, 39, 35, 0.05);
+  --shadow-cta: 0 8px 20px rgba(217, 119, 6, 0.28);
+}
+
+/* ---------- Reset / base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--cream);
+  color: var(--chocolate);
+  /* Functional body text: clean, legible Montserrat @ 400 */
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+/* Stylized display typeface for H1 & H2 only */
+h1,
+h2 {
+  font-family: var(--font-display);
+  font-weight: 400; /* Frunchy Sage carries its own visual weight */
+  letter-spacing: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ============================================================
+   HEADER / NAV — glassmorphism sticky bar
+   ============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: var(--cream-translucent);
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  border-bottom: 1px solid rgba(62, 39, 35, 0.08);
+}
+
+/* Fallback for browsers without backdrop-filter */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-header {
+    background-color: rgba(252, 245, 229, 0.97);
+  }
+}
+
+.site-nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  position: relative;
+  color: var(--chocolate);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 400; /* clean, legible Montserrat 400 */
+  font-size: 15px;
+  letter-spacing: 0.4px;
+  padding: 6px 2px;
+  transition: color 0.2s ease;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--burnt-orange);
+  transition: width 0.25s ease;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+  color: var(--burnt-orange);
+}
+
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after {
+  width: 100%;
+}
+
+/* Instagram icon link — replaces the Book Now CTA in the nav */
+.instagram-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--burnt-orange);
+  padding: 6px;
+  border-radius: 50%;
+  transition: transform 0.25s ease, filter 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.instagram-icon {
+  display: block;
+  width: 28px;
+  height: 28px;
+  color: var(--burnt-orange); /* SVG strokes use currentColor */
+}
+
+.instagram-link:hover,
+.instagram-link:focus-visible {
+  transform: scale(1.1);
+  /* Soft glow using the burnt orange */
+  filter: drop-shadow(0 0 10px rgba(217, 119, 6, 0.55));
+  outline: none;
+}
+
+.instagram-link:active {
+  transform: scale(1.05);
+}
+
+/* ============================================================
+   MAIN / HERO
+   ============================================================ */
+.site-main {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+}
+
+.hero {
+  text-align: center;
+  padding: 48px 16px 24px;
+}
+
+.hero-eyebrow {
+  /* Eyebrow is metadata, not a heading — keep on Montserrat */
+  font-family: var(--font-body);
+  color: var(--burnt-orange);
+  font-weight: 500;
+  letter-spacing: 3px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.hero-title {
+  /* Inherits font-family: var(--font-display) from h1 rule */
+  font-size: clamp(52px, 8vw, 88px);
+  font-weight: 400; /* Frunchy Sage has its own display weight */
+  line-height: 1.0;
+  color: var(--chocolate);
+}
+
+.hero-sub {
+  font-family: var(--font-body);
+  font-weight: 400;
+  margin-top: 18px;
+  color: var(--chocolate-soft);
+  font-size: 17px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================================
+   WAVY DIVIDER — sky blue, between hero and first card
+   ============================================================ */
+.wave-divider {
+  height: 28px;
+  margin: 32px 0 40px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24' preserveAspectRatio='none'><path d='M0 12 Q 15 0 30 12 T 60 12 T 90 12 T 120 12' fill='none' stroke='%237DD3FC' stroke-width='3' stroke-linecap='round'/></svg>");
+  background-repeat: repeat-x;
+  background-size: 120px 24px;
+  background-position: center;
+}
+
+/* ============================================================
+   RETRO CARDS — cream bg, 40px radius, burnt-orange border
+   ============================================================ */
+
+/* On-scroll reveal keyframes — subtle fade: cards start partially
+   visible so the motion reads as a gentle settle-in rather than a
+   hard appearance. */
+@keyframes fadeUp {
+  from {
+    opacity: 0.3;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.retro-card {
+  background-color: var(--cream);
+  border: 2px solid var(--burnt-orange);
+  border-radius: var(--radius-card);
+  padding: 32px 36px;
+  margin: 28px 0;
+  box-shadow: var(--shadow-card);
+  scroll-margin-top: 100px; /* offset sticky header for anchor jumps */
+  /* Hover transitions — smooth lift + glow after reveal completes */
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.35s ease,
+              border-color 0.35s ease;
+}
+
+/* Cards start partially faded AND pre-offset when JS is available.
+   The offset/opacity must match fadeUp's `from` keyframe exactly
+   so that adding `.visible` doesn't cause a visual jump — the
+   animation continues smoothly from the card's current state.
+   Non-JS users see fully opaque, in-position cards. */
+.js .retro-card {
+  opacity: 0.3;
+  transform: translateY(24px);
+}
+
+.js .retro-card.visible {
+  animation: fadeUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Hover: gentle lift + softly glowing burnt-orange border */
+.retro-card:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 0 0 4px rgba(217, 119, 6, 0.18),   /* halo around the border */
+    0 0 22px rgba(217, 119, 6, 0.28),    /* outer glow */
+    0 20px 40px rgba(217, 119, 6, 0.18), /* warm lift shadow */
+    0 2px 6px rgba(62, 39, 35, 0.06);
+}
+
+.heading {
+  /* h2 — inherits font-family: var(--font-display) from h2 rule */
+  display: inline-block;
+  color: var(--burnt-orange);
+  font-size: 30px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.1;
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--burnt-orange);
+}
+
+/* ---------- Service menu rows ---------- */
+.service-list {
+  display: block;
+}
+
+.service-item {
+  /* Functional menu row — Montserrat 400 base */
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 10px 0;
+  color: var(--chocolate);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.45;
+  text-align: left;
+}
+
+.service-item + .service-item {
+  border-top: 1px solid rgba(62, 39, 35, 0.06);
+}
+
+.service-name {
+  flex: 0 1 auto;
+  min-width: 0;
+  font-weight: 400;
+}
+
+.service-dots {
+  flex: 1 1 auto;
+  border-bottom: 2px dotted var(--chocolate);
+  margin: 0 6px 7px;
+  min-width: 24px;
+  align-self: flex-end;
+}
+
+.service-price {
+  flex: 0 0 auto;
+  /* Subtle emphasis via weight 600 — maintains Montserrat 400 body feel */
+  font-weight: 600;
+  color: var(--chocolate);
+  white-space: nowrap;
+  text-align: right;
+  font-variant-numeric: tabular-nums; /* clean price alignment */
+}
+
+.service-note {
+  font-size: 0.82em;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--chocolate-soft);
+  margin-left: 6px;
+}
+
+/* ============================================================
+   MOBILE (<768px)
+   - Stack service name / price
+   - Remove dotted leaders to prevent crowding
+   ============================================================ */
+@media (max-width: 767.98px) {
+  .site-nav {
+    padding: 14px 18px;
+    gap: 10px;
+  }
+
+  .nav-links {
+    gap: 18px;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+  }
+
+  .instagram-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .site-main {
+    padding: 20px 14px 60px;
+  }
+
+  .hero {
+    padding: 32px 12px 16px;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 2.5px;
+  }
+
+  .hero-sub {
+    font-size: 15px;
+  }
+
+  .wave-divider {
+    margin: 24px 0 28px;
+    height: 22px;
+    background-size: 90px 18px;
+  }
+
+  .retro-card {
+    padding: 24px 22px;
+    border-radius: 32px;
+    margin: 20px 0;
+  }
+
+  .heading {
+    font-size: 24px;
+    margin-bottom: 14px;
+  }
+
+  /* Stack name + price; left-aligned; kill the dotted leader */
+  .service-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    padding: 12px 0;
+  }
+
+  .service-dots {
+    display: none;
+  }
+
+  .service-price {
+    text-align: left;
+    font-size: 16px;
+  }
+}
+
+/* ============================================================
+   FOOTER — "Follow the style on Instagram"
+   ============================================================ */
+.site-footer {
+  /* Slightly darker than the cream body to anchor the page */
+  background-color: #F3EAD3;
+  padding: 80px 24px;
+  text-align: center;
+  border-top: 1px solid rgba(62, 39, 35, 0.06);
+}
+
+.footer-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.footer-title {
+  /* h2 — inherits Frunchy Sage from h2 rule */
+  font-size: clamp(28px, 4.2vw, 46px);
+  color: var(--chocolate);
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 0;
+}
+
+/* Modern-Retro ghost button */
+.insta-button {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 0.6px;
+  color: var(--burnt-orange);
+  text-decoration: none;
+  background-color: transparent;
+  border: 3px solid var(--burnt-orange);
+  border-radius: 50px;
+  padding: 16px 36px;
+  transition: background-color 0.25s ease, color 0.25s ease,
+    transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.insta-button:hover,
+.insta-button:focus-visible {
+  background-color: var(--burnt-orange);
+  color: var(--cream);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(217, 119, 6, 0.28);
+  outline: none;
+}
+
+.insta-button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 767.98px) {
+  .site-footer {
+    padding: 64px 20px;
+  }
+
+  .footer-inner {
+    gap: 24px;
+  }
+
+  .insta-button {
+    font-size: 16px;
+    padding: 14px 28px;
+  }
+}
+
+/* ============================================================
+   ACCESSIBILITY
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Don't hide cards while reveal is effectively disabled */
+  .js .retro-card {
+    opacity: 1;
+  }
+
+  /* Neutralise the hover lift — keep the glow for feedback */
+  .retro-card:hover {
+    transform: none;
+  }
+}
